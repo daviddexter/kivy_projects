@@ -1,0 +1,162 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
+#:import ListItemButton kivy.uix.listview.ListItemButton
+#:import ListAdapter kivy.adapters.listadapter.ListAdapter
+#:import datetime datetime.datetime
+<AddButton@AnchorLayout>:
+    anchor_x:'right'
+    anchor_y:'bottom'
+    Button:
+        text:"+"
+        background_color:get_color_from_hex('#009688')
+        font_size:30
+        size_hint_y:None
+        size_hint_x:None
+        height:self.texture_size[1] + (self.texture_size[1]/2)
+        width:self.texture_size[1] + (self.texture_size[1]/2)
+        padding:3,3
+        on_release:app.root.change_screen()
+
+<QuitButton@AnchorLayout>:
+    anchor_x:'left'
+    anchor_y:'bottom'
+    Button:
+        text:":)"
+        background_color:get_color_from_hex('#ff6f00')
+        font_size:30
+        size_hint_y:None
+        size_hint_x:None
+        height:self.texture_size[1] + (self.texture_size[1]/2)
+        width:self.texture_size[1] + (self.texture_size[1]/2)
+        padding:3,3
+        on_release:app.root.quitapp()
+
+<AppBoxLayout@BoxLayout>:
+    orientation:"vertical"
+    padding:root.width * 0.10, root.height * 0.10
+    spacing:min(root.width, root.height) * 0.02
+
+<StartScreen@Screen>:
+    itemscontainer:itemscontainer
+    AppBoxLayout:
+        Label:
+            text:"My Activity"
+        BoxLayout:
+            id:itemscontainer
+            ListView:
+                adapter:
+                    ListAdapter(
+                    data=["Item #{0}".format(i) for i in range(100)],
+                    selection_mode='single',
+                    allow_empty_selection=False,
+                    cls=ListItemButton)
+        BoxLayout:
+            QuitButton:
+            AddButton:
+
+<AddScreen@Screen>:
+    activity:activity
+
+    up_year:up_year
+    year:year
+    down_year:down_year
+
+    up_month:up_month
+    month:month
+    down_month:down_month
+
+    up_day:up_day
+    day:day
+    down_day:down_day
+
+    AppBoxLayout:
+        GridLayout:
+            rows:3
+            spacing:min(root.width, root.height) * 0.02
+            BoxLayout:
+                orientation:"vertical"
+                Label:
+                    text:"Activity"
+                TextInput:
+                    multiline:False
+                    id:activity
+
+            BoxLayout:
+                orientation:"vertical"
+                BoxLayout:
+                    BoxLayout:
+                        orientation:"vertical"
+                        Label:
+                            text:"Year"
+                        Button:
+                            text:"+"
+                            id:up_year
+                            on_release:app.root.change_year_up()
+                        Label:
+                            text:str(datetime.now().year)
+                            id:year
+                        Button:
+                            text:"-"
+                            id:down_year
+                            on_release:app.root.change_year_down()
+
+                    BoxLayout:
+                        orientation:"vertical"
+                        Label:
+                            text:"Month"
+                        Button:
+                            text:"+"
+                            id:up_month
+                            on_release:app.root.change_month_up()
+                        Label:
+                            text:str(datetime.now().month)
+                            id:month
+                        Button:
+                            text:"-"
+                            id:down_month
+                            on_release:app.root.change_month_down()
+                    BoxLayout:
+                        orientation:"vertical"
+                        Label:
+                            text:"Day"
+                        Button:
+                            text:"+"
+                            id:up_day
+                            on_release:app.root.change_day_up()
+                        Label:
+                            text:str(datetime.now().day)
+                            id:day
+                        Button:
+                            text:"-"
+                            id:down_day
+                            on_release:app.root.change_day_down()
+
+
+            BoxLayout:
+                Button:
+                    text:"Save"
+                    size_hint_y:None
+                    height:self.texture_size[1] * self.texture_size[1]/4
+                    background_color:get_color_from_hex('#009688')
+                    on_release:app.root.save_item()
+
+
+<MainContainer>:
+    app_screen_manager:app_screen_manager
+    add_screen:add_screen
+    ScreenManager:
+        id:app_screen_manager
+        transition:WipeTransition()
+        StartScreen:
+            name:"start_screen"
+        AddScreen:
+            name:"add_screen"
+            id:add_screen
+
+
+
+
+
+
+
+

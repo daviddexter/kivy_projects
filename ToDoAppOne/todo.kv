@@ -1,0 +1,36 @@
+<ItemsContainer@AnchorLayout>:
+    canvas.before:
+        Color:
+            rgba:.5,.7,.3,1
+        Rectangle:
+            pos:self.pos
+            size:self.size
+
+
+<ItemsWidget>:
+    orientation:"vertical"
+    ItemsContainer:
+
+<ItemAddButton@AnchorLayout>:
+    anchor_x:'right'
+    Button:
+        text:"ADD"
+        size_hint_y:None
+        size_hint_x:None
+        height:self.texture_size[1] + (self.texture_size[1]/2)
+        width:self.texture_size[0] + (self.texture_size[0]/2)
+        padding:3,3
+        background_color:1,0,0,1
+
+<Container>:
+    orientation:"vertical"
+    spacing:5
+    Label:
+        text:'My ToDo App'
+    ItemAddButton:
+
+
+
+
+
+

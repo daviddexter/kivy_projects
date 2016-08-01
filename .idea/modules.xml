@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Kivy.iml" filepath="$PROJECT_DIR$/.idea/Kivy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MachineLearning/.idea/MachineLearning.iml" filepath="$PROJECT_DIR$/../MachineLearning/.idea/MachineLearning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MeetupApp/.idea/MeetupApp.iml" filepath="$PROJECT_DIR$/../MeetupApp/.idea/MeetupApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MobiWajibu/.idea/MobiWajibu.iml" filepath="$PROJECT_DIR$/../MobiWajibu/.idea/MobiWajibu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyChatApp/.idea/MyChatApp.iml" filepath="$PROJECT_DIR$/../MyChatApp/.idea/MyChatApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Others/.idea/Others.iml" filepath="$PROJECT_DIR$/../Others/.idea/Others.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Study/.idea/Study.iml" filepath="$PROJECT_DIR$/../Study/.idea/Study.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../WajibuWebPrototype/.idea/WajibuPrototype.iml" filepath="$PROJECT_DIR$/../WajibuWebPrototype/.idea/WajibuPrototype.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../WebServices/.idea/WebServices.iml" filepath="$PROJECT_DIR$/../WebServices/.idea/WebServices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Work/.idea/Work.iml" filepath="$PROJECT_DIR$/../Work/.idea/Work.iml" />
+    </modules>
+  </component>
+</project>

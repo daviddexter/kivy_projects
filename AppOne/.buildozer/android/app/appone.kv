@@ -1,0 +1,44 @@
+<MyTextBox@TextInput>:
+    size_hint_y:None
+    height:30
+    font_size:15
+    multiline:False
+
+<Container>:
+    orientation:"vertical"
+
+
+    MyTextBox:
+        id:textbox
+        on_text:root.update_label()
+    Label:
+        id:capital_label
+    Label:
+        id:lower_label
+    Label:
+        id:red_label
+        text:textbox.text
+        font_size:100
+    Label:
+        id:green_label
+        text:textbox.text
+        font_size:100
+    Label:
+        id:blue_label
+        text:textbox.text
+        font_size:100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

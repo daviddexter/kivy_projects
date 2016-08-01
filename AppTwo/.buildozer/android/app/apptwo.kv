@@ -1,0 +1,131 @@
+#:import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+<MyButton@Button>:
+
+<Container>:
+    ScreenManager:
+        id:screen_manager
+        transition:RiseInTransition()
+        StartScreen:
+            id:startscreen
+            name:'startscreen'
+        AppScreen:
+            id:appscreen            
+            name:"appscreen"
+
+<StartScreen@Screen>:
+    BoxLayout:
+        orientation:"vertical"
+        AnchorLayout:
+            Label:
+                text:"[b]Welcome to Jaba[/b]"
+                markup:True
+        AnchorLayout:
+            Button:
+                text:"Go to App"
+                font_size:16
+                size_hint_y:None
+                size_hint_x:None
+                height:self.texture_size[1] + (self.texture_size[1]/2)
+                width:self.texture_size[0] + (self.texture_size[0]/2)
+                padding:3,3
+                background_color:0.6,0.3,.6,1
+                on_release:app.root.go_to_app()
+
+<AppScreen@Screen>:
+    BoxLayout:
+        orientation:"vertical"
+        Label:
+            text:"Jaba App - Premitive Version - "
+            halign:"left"
+            size_hint_y:None
+            height:root.height/20
+        BoxLayout:
+            BoxLayout:
+                orientation:"vertical"
+                Accordion:
+                    orientation:"vertical"
+                    AccordionItem:
+                        title:"My Space"
+                        canvas.before:
+                            Color:
+                                rgba:1,0,0,1
+                            Rectangle:
+                                pos:self.pos
+                                size:self.size
+                        BoxLayout:
+                            orientation:"vertical"
+                            MyButton:
+                                text:"People"
+                                on_release:item_manager.current = 'peoplescreen'
+                            MyButton:
+                                text:"Wall"
+                                on_release:item_manager.current = 'wallscreen'
+                            MyButton:
+                                text:"Schedule"
+                                on_release:item_manager.current = 'schedulescreen'
+                            MyButton:
+                                text:"Settings"
+                                on_release:app.open_settings()
+                    AccordionItem:
+                        title:"Connections"
+                        BoxLayout:
+                            orientation:"vertical"
+                            MyButton:
+                                text:"Connect Box"
+                                on_release:item_manager.current = 'connectboxscreen'
+                            MyButton:
+                                text:"Connect Wall"
+                                on_release:item_manager.current = 'connectwallscreen'
+            BoxLayout:
+                orientation:"vertical"
+                ScreenManager:
+                    id:item_manager
+                    transition:RiseInTransition()
+                    PeopleScreen:
+                        id:peoplescreen
+                        name:'peoplescreen'
+                    WallScreen:
+                        id:wallscreen
+                        name:'wallscreen'
+                    ScheduleScreen:
+                        id:schedulescreen
+                        name:'schedulescreen'
+                    ConnectBoxScreen:
+                        id:connectboxscreen
+                        name:'connectboxscreen'
+                    ConnectWallScreen:
+                        id:connectwallscreen
+                        name:'connectwallscreen'
+
+        Button:
+            text:"Close"
+            size_hint_y:None
+            height:root.height/20
+            on_release:app.root.close_app()
+
+
+<PeopleScreen@Screen>:
+    BoxLayout:
+        Label:
+            text:"people screen"
+
+<WallScreen@Screen>:
+    BoxLayout:
+        Label:
+            text:"wall screen"
+
+<ScheduleScreen@Screen>:
+    BoxLayout:
+        Label:
+            text:'schedule screen'
+
+<ConnectBoxScreen@Screen>:
+    BoxLayout:
+        Label:
+            text:'connect box screen'
+
+<ConnectWallScreen@Screen>:
+    BoxLayout:
+        Label:
+            text:'connect wall screen'

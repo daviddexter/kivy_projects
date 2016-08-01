@@ -1,0 +1,186 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+<WrappedLabel@Label>:
+	size_hint_y:None
+	height:self.texture_size[1] + (self.texture_size[1]/2)
+	markup:True
+
+<WrappedBoxLayout@BoxLayout>:
+	orientation:"vertical"
+	padding:root.width * 0.02, root.height * 0.02
+	spacing:min(root.width, root.height) * 0.02	
+
+<KeyPad@GridLayout>:
+    cols:3
+    rows:5
+    Button:
+        text:"1"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"2"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"3"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"4"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"5"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"6"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"7"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"8"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"9"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"."
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"0"
+        on_release:app.root.add_text(self.text)
+    Button:
+        text:"CLEAR"
+        on_release:app.root.clear()
+    Button:
+        text:">>>"
+        on_release:app.root.proceed_operation()
+
+<KivyTutorRoot>:
+	orientation:"vertical"
+	kivy_screen_manager:kivy_screen_manager
+	math_screen:math_screen
+	ScreenManager:
+		id:kivy_screen_manager
+		transition:FadeTransition()
+		StartScreen:
+			name:"start_screen"
+		AboutScreen:
+			id:about_screen
+			name:"about_screen"
+		MathScreen:
+			id:math_screen
+			name:"math_screen"		
+
+<StartScreen@Screen>:
+	WrappedBoxLayout:
+		ActionBar:
+			background_color:get_color_from_hex('#ffff00')
+			ActionView:
+				ActionPrevious:
+					title:"KivyTutor"
+					app_icon:'app.png'
+					with_previous:False
+				ActionOverflow:
+					ActionButton:
+						text:"Settings"
+						on_press:app.open_settings()
+					ActionButton:
+						text:"Quit"
+						on_press:app.quit_app()			
+
+
+		WrappedLabel:
+			text:"[b]"+app.name.upper()+"[/b]"
+			font_size:min(root.height, root.width)/10			
+		Button:
+			text:"Addition"
+			on_release:app.root.changeScreen(self.text.lower())
+		Button:
+			text:"Subtraction"
+			on_release:app.root.changeScreen(self.text.lower())
+		Button:
+			text:"Multiplication"
+			on_release:app.root.changeScreen(self.text.lower())
+		Button:
+			text:"Division"
+			on_release:app.root.changeScreen(self.text.lower())
+		Button:
+			text:"About This App"
+			on_release:app.root.changeScreen(self.text.lower())						
+
+<MathScreen>:
+	operation_text:operation_text
+	question_text:question_text
+	input_text:input_text
+	answer_text:answer_text
+	WrappedBoxLayout:
+		ActionBar:
+			background_color:get_color_from_hex('#ffff00')
+			ActionView:
+				ActionPrevious:
+					title:"Arthmetic Operation"
+					app_icon:'app.png'
+					with_previous:True
+					on_release:app.root.previousScreen()
+				ActionOverflow:
+					ActionButton:
+						text:"Settings"
+						on_press:app.open_settings()
+					
+		Label:
+			id:operation_text
+			font_size:min(root.height, root.width)/20
+
+        BoxLayout:
+            orientation:"vertical"
+            Label:
+                id:question_text
+                font_size:min(root.height, root.width)/25
+            Label:
+                id:input_text
+                font_size:min(root.height, root.width)/50
+        KeyPad:
+
+		BoxLayout:
+			size_hint_y:None
+			WrappedLabel:
+				id:answer_text
+				text:""
+				font_size:min(root.height, root.width)/20
+
+			Button:
+				id:answer_btn
+				text:"[b]Get Answer[/b]"
+				markup:True
+				size_hint_y:None
+				size_hint_x:None
+				height:self.texture_size[1] + (self.texture_size[1]/2)
+				width:self.texture_size[0] + (self.texture_size[0]/2)
+				on_press:app.root.get_answer()
+
+
+
+<AboutScreen@Screen>:
+	WrappedBoxLayout:
+		ActionBar:
+			background_color:get_color_from_hex('#ffff00')
+			ActionView:
+				ActionPrevious:
+					title:"About App"
+					app_icon:'app.png'
+					with_previous:True
+					on_release:app.root.previousScreen()
+				ActionOverflow:
+					ActionButton:
+						text:"Settings"
+						on_press:app.open_settings()
+					ActionButton:
+						text:"Quit"
+						on_press:app.quit_app()	
+		Label:
+			text:app.getText()
+			halign:"center"
+			markup:True
+			font_size:root.height/20
+			text_size:self.width, None
+			center_y:.5
+			on_ref_press:app.on_ref_press(*args) 
